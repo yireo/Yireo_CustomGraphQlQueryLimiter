@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo CustomGraphQlQueryLimiter for Magento
+ *
+ * @author      Yireo (https://www.yireo.com/)
+ * @copyright   Copyright 2020 Yireo (https://www.yireo.com/)
+ * @license     Open Source License (OSL v3)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::marketing">
+                    <resource id="Magento_Backend::marketing_communications">
+                        <resource id="Yireo_CustomGraphQlQueryLimiter::index" title="Yireo CustomGraphQlQueryLimiter" sortOrder="10" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

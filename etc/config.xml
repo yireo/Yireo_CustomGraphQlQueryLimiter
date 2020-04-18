@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Yireo CustomGraphQlQueryLimiter for Magento
+ *
+ * @author      Yireo (https://www.yireo.com/)
+ * @copyright   Copyright 2020 Yireo (https://www.yireo.com/)
+ * @license     Open Source License (OSL v3)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <graphql_query_limiter>
+            <settings>
+                <query_depth>20</query_depth>
+                <query_complexity>300</query_complexity>
+            </settings>
+        </graphql_query_limiter>
+    </default>
+</config>
