@@ -21,9 +21,11 @@
                 <label>Settings</label>
                 <field id="query_depth" type="text" translate="label" sortOrder="23" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Query Depth</label>
+                    <comment>Default: 20</comment>
                 </field>
                 <field id="query_complexity" type="text" translate="label" sortOrder="23" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Query Complexity</label>
+                    <comment>Default: 300</comment>
                 </field>
             </group>
         </section>
