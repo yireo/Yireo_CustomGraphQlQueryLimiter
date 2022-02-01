@@ -11,10 +11,6 @@ use Magento\Framework\GraphQl\Query\Resolver\ContextInterface;
 use Magento\Framework\GraphQl\Schema;
 use Yireo\CustomGraphQlQueryLimiter\Config\Config;
 
-/**
- * Class QueryComplexityLimiterPlugin
- * @package Yireo\CustomGraphQlQueryLimiter\Plugin
- */
 class QueryProcessorPlugin
 {
     /**

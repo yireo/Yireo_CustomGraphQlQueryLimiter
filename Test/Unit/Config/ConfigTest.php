@@ -48,7 +48,6 @@ class ConfigTest extends TestCase
         $config->getQueryComplexity();
     }
 
-
     /**
      * @return mixed
      */

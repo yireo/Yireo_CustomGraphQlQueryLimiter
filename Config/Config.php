@@ -1,15 +1,10 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Yireo\CustomGraphQlQueryLimiter\Config;
 
 use GraphQL\Error\Error;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
-/**
- * Class Config
- * @package Yireo\CustomGraphQlQueryLimiter\Config
- */
 class Config
 {
     /**
