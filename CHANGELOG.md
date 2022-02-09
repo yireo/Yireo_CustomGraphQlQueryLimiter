@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 9 February 2022 
+### Fixed
+- Fixed issue with new validateFieldCount() in 2.4.3 (issued by @youanden)
+- Removed `setup_version` from module.xml
+
 ## [0.0.2] - 29 July 2020
 ### Added
 - Magento 2.4 compatibility
