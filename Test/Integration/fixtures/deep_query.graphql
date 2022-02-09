@@ -1,0 +1,19 @@
+query {
+    products(search: "dress") {
+        items {
+            categories {
+                products {
+                    items {
+                        categories {
+                            products {
+                                items {
+                                    name
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

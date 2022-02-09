@@ -81,3 +81,5 @@ Looking at the culprit query above, the depth is 10: Simply counting the opening
 The complexity could be modified as well. Looking at the culprit query above, the complexity is 15. It proves that the complexity of a GraphQL query might be quite low, but still the impact could be high. However, setting the complexity to 300 seems rather high. Perhaps in your case, setting it to 50 might be a better idea.
 
 The Webonyx library also allows you to add a complexity function to a specific field definition. Theoretically, this is something that would need to be customized per query (`categories`, `products`). What makes a specific query less performant and would therefore need to be labeled as *complex*?  
+
+Note that setting an empty value on either query depth or complexity in the database, will make the value to be skipped. At that moment, the original DI configuration is taken into account.

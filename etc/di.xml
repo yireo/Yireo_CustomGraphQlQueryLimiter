@@ -3,4 +3,6 @@
     <type name="Magento\Framework\GraphQl\Query\QueryProcessor">
         <plugin name="Yireo_CustomGraphQlQueryLimiter_QueryProcessorPlugin" type="Yireo\CustomGraphQlQueryLimiter\Plugin\QueryProcessorPlugin"/>
     </type>
+
+    <preference for="Magento\Framework\GraphQl\Query\QueryComplexityLimiter" type="Yireo\CustomGraphQlQueryLimiter\GraphQl\Query\CustomQueryComplexityLimiter"/>
 </config>

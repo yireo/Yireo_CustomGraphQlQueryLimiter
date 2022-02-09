@@ -1,0 +1,49 @@
+query {
+    products(search: "dress") {
+        page_info {
+            current_page
+            page_size
+        }
+        items {
+            description {
+                html
+            }
+            image {
+                label
+                position
+                url
+            }
+            meta_title
+            meta_keyword
+            meta_description
+            upsell_products {
+                uid
+                name
+            }
+            crosssell_products {
+                uid
+                name
+            }
+            categories {
+                uid
+                name
+                products {
+                    items {
+                        categories {
+                            cms_block {
+                                title
+                                content
+                            }
+                            products {
+                                items {
+                                    uid
+                                    name
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

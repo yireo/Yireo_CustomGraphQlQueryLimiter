@@ -2,54 +2,77 @@
 
 namespace Yireo\CustomGraphQlQueryLimiter\Test\Integration;
 
-use Magento\Framework\App\State as AppState;
-use Magento\GraphQl\Service\GraphQlRequest;
-use Magento\TestFramework\Helper\Bootstrap;
-use PHPUnit\Framework\TestCase;
+use Yireo\IntegrationTestHelper\Test\Integration\GraphQlTestCase;
 
-/**
- * @magentoAppArea graphql
- * @magentoDbIsolation disabled
- * @magentoCache full_page enabled
- */
-class GraphQlOutputTest extends TestCase
+class GraphQlOutputTest extends GraphQlTestCase
 {
-    private $objectManager;
-
-    protected function setUp(): void
+    /**
+     * @return void
+     * @magentoAppArea graphql
+     */
+    public function testIfQueryWorksAsUsualWhenConfigurationIsNotThere()
     {
-        $this->objectManager = Bootstrap::getObjectManager();
+        $queryData = $this->getGraphQlQueryData('query { __schema { types { kind }} }');
+        $this->assertGraphQlDataHasData('__schema.types', $queryData);
     }
 
     /**
      * @return void
      * @magentoAppArea graphql
-     * @magentoCache all disabled
-     * @magentoConfigFixture default/graphql_rate_limiting/settings/enabled 1
-     * @magentoConfigFixture default/graphql_rate_limiting/settings/limit_queries 1
-     * @magentoConfigFixture default/graphql_rate_limiting/settings/max_queries 0
-     * @magentoConfigFixture default/graphql_rate_limiting/settings/timeframe 1
+     * @magentoConfigFixture graphql_query_limiter/settings/query_depth 0
+     * @magentoConfigFixture graphql_query_limiter/settings/query_complexity 1000
      */
-    public function testIfQueryIsDeniedWhenMaxQueriesIsZero()
+    public function testIfQueryWorksAsUsualWhenQueryDepthIsEmpty()
     {
-        $result = $this->dispatchGraphQlQuery('query { __schema { types { kind }} }');
-        $this->assertArrayHasKey('errors', $result);
-        $this->assertNotEmpty($result['errors']);
-        $this->assertArrayHasKey('message', $result['errors'][0]);
-        $this->assertStringContainsString('Jisse', $result['errors'][0]['message'], var_export($result, true));
+        $queryData = $this->getGraphQlQueryData('query { __schema { types { kind }} }');
+        $this->assertGraphQlDataHasData('__schema.types', $queryData);
     }
 
     /**
-     * @param string $query
-     * @return array
+     * @return void
+     * @magentoAppArea graphql
+     * @magentoConfigFixture graphql_query_limiter/settings/query_depth 1000
+     * @magentoConfigFixture graphql_query_limiter/settings/query_complexity 10
      */
-    private function dispatchGraphQlQuery(string $query): array
+    public function testIfQueryIsDeniedWhenQueryComplexityIsTooMuch()
     {
-        $this->objectManager->get(AppState::class)->setAreaCode('graphql');
+        $this->assertStoreConfigValueEquals(1000, 'graphql_query_limiter/settings/query_depth');
+        $this->assertStoreConfigValueEquals(10, 'graphql_query_limiter/settings/query_complexity');
 
-        $graphQlRequest = $this->objectManager->get(GraphQlRequest::class);
-        $response = $graphQlRequest->send($query);
+        $graphQlQueryFile = file_get_contents(__DIR__ . '/fixtures/complex_query.graphql');
+        $queryData = $this->getGraphQlQueryData($graphQlQueryFile);
+        $this->assertGraphQlDataHasError('Max query complexity should be 10 but got', $queryData);
+    }
 
-        return json_decode($response->getContent(), true);
+    /**
+     * @return void
+     * @magentoAppArea graphql
+     * @magentoConfigFixture graphql_query_limiter/settings/query_depth 1000
+     * @magentoConfigFixture graphql_query_limiter/settings/query_complexity 100
+     */
+    public function testIfQueryIsAllowedWhenQueryComplexityIsAllowed()
+    {
+        $this->assertStoreConfigValueEquals(1000, 'graphql_query_limiter/settings/query_depth');
+        $this->assertStoreConfigValueEquals(100, 'graphql_query_limiter/settings/query_complexity');
+
+        $graphQlQueryFile = file_get_contents(__DIR__ . '/fixtures/complex_query.graphql');
+        $queryData = $this->getGraphQlQueryData($graphQlQueryFile);
+        $this->assertGraphQlDataHasData('products.page_info', $queryData);
+    }
+
+    /**
+     * @return void
+     * @magentoAppArea graphql
+     * @magentoConfigFixture graphql_query_limiter/settings/query_depth 3
+     * @magentoConfigFixture graphql_query_limiter/settings/query_complexity 1000
+     */
+    public function testIfQueryIsDeniedWhenQueryDepthIsTooMuch()
+    {
+        $this->assertStoreConfigValueEquals(3, 'graphql_query_limiter/settings/query_depth');
+        $this->assertStoreConfigValueEquals(1000, 'graphql_query_limiter/settings/query_complexity');
+
+        $graphQlQueryFile = file_get_contents(__DIR__ . '/fixtures/deep_query.graphql');
+        $queryData = $this->getGraphQlQueryData($graphQlQueryFile);
+        $this->assertGraphQlDataHasError('Max query depth should be 3 but got', $queryData);
     }
 }
