@@ -19,16 +19,6 @@ class ConfigTest extends TestCase
         $this->assertEquals(42, $config->getQueryDepth());
     }
 
-    public function testGetQueryDepthWithEmptyValue()
-    {
-        $scopeConfig = $this->getScopeConfig();
-        $scopeConfig->method('getValue')->willReturn(0);
-
-        $config = new Config($scopeConfig);
-        $this->expectException(GraphQlError::class);
-        $config->getQueryDepth();
-    }
-
     public function testGetQueryComplexity()
     {
         $scopeConfig = $this->getScopeConfig();
@@ -36,16 +26,6 @@ class ConfigTest extends TestCase
 
         $config = new Config($scopeConfig);
         $this->assertEquals(42, $config->getQueryComplexity());
-    }
-
-    public function testGetQueryComplexityWithEmptyValue()
-    {
-        $scopeConfig = $this->getScopeConfig();
-        $scopeConfig->method('getValue')->willReturn(0);
-
-        $config = new Config($scopeConfig);
-        $this->expectException(GraphQlError::class);
-        $config->getQueryComplexity();
     }
 
     /**
