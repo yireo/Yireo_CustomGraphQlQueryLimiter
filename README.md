@@ -1,6 +1,9 @@
 # Yireo CustomGraphQlQueryLimiter
 Magento 2 module to customize settings for the GraphQL Query Limiter to enhance performance and security of your headless Magento.
 
+### Installation
+Install via composer (`composer require yireo/magento2-custom-graph-ql-query-limiter`), enable the module `Yireo_CustomGraphQlQueryLimiter`, refresh caching and do your magic with DI compilation, static content and database upgrades.
+
 ### Usage
 The [Yireo CustomGraphQlQueryLimiter](CustomGraphQlQueryLimiter) module allows you to modify the query depth and the query complexity in an easy way, by simply letting you change these values from the **Magento Admin Panel**. Simply navigate to the **Store Configuration** in your backend and then to **Yireo > Yireo CustomGraphQlQueryLimiter > Settings** and set the desired values.
  
