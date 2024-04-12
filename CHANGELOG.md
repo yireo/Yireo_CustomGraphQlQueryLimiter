@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 12 April 2024
+### Fixed
+- Changed method arguments in M 2.4.7
+
 ## [0.0.3] - 9 February 2022 
 ### Fixed
 - Fixed issue with new validateFieldCount() in 2.4.3 (issued by @youanden)

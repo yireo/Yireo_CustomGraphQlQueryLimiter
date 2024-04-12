@@ -3,6 +3,7 @@
 namespace Yireo\CustomGraphQlQueryLimiter\Plugin;
 
 use GraphQL\Error\Error;
+use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Validator\DocumentValidator;
 use GraphQL\Validator\Rules\QueryComplexity;
 use GraphQL\Validator\Rules\QueryDepth;
@@ -41,7 +42,7 @@ class QueryProcessorPlugin
     public function beforeProcess(
         QueryProcessor $queryProcessor,
         Schema $schema,
-        string $source,
+        DocumentNode|string $source,
         ContextInterface $contextValue = null,
         array $variableValues = null,
         string $operationName = null
