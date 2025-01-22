@@ -42,7 +42,7 @@ class QueryProcessorPlugin
     public function beforeProcess(
         QueryProcessor $queryProcessor,
         Schema $schema,
-        DocumentNode|string $source,
+        string $source,
         ContextInterface $contextValue = null,
         array $variableValues = null,
         string $operationName = null
