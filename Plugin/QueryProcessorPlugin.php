@@ -43,9 +43,9 @@ class QueryProcessorPlugin
         QueryProcessor $queryProcessor,
         Schema $schema,
         string $source,
-        ContextInterface $contextValue = null,
-        array $variableValues = null,
-        string $operationName = null
+        ?ContextInterface $contextValue = null,
+        ?array $variableValues = null,
+        ?string $operationName = null
     ) {
         DocumentValidator::addRule(new QueryComplexity($this->config->getQueryComplexity()));
         DocumentValidator::addRule(new QueryDepth($this->config->getQueryDepth()));
