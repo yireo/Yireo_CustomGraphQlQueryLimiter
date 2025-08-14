@@ -39,10 +39,10 @@ class CustomQueryComplexityLimiter extends QueryComplexityLimiter
      * @param ModuleConfig $moduleConfig
      */
     public function __construct(
-        int $queryDepth = 0,
-        int $queryComplexity = 0,
         IntrospectionConfiguration $introspectionConfig,
-        ModuleConfig $moduleConfig
+        ModuleConfig $moduleConfig,
+        int $queryDepth = 0,
+        int $queryComplexity = 0
     ) {
         parent::__construct($queryDepth, $queryComplexity, $introspectionConfig);
         $this->moduleConfig = $moduleConfig;
