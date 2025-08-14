@@ -39,8 +39,8 @@ class CustomQueryComplexityLimiter extends QueryComplexityLimiter
      * @param ModuleConfig $moduleConfig
      */
     public function __construct(
-        int $queryDepth,
-        int $queryComplexity,
+        int $queryDepth = 0,
+        int $queryComplexity = 0,
         IntrospectionConfiguration $introspectionConfig,
         ModuleConfig $moduleConfig
     ) {
@@ -52,10 +52,14 @@ class CustomQueryComplexityLimiter extends QueryComplexityLimiter
     public function execute(): void
     {
         $queryDepth = $this->moduleConfig->getQueryDepth() ?? $this->queryDepth;
-        DocumentValidator::addRule(new QueryDepth($queryDepth));
+        if ($queryDepth > 0) {
+            DocumentValidator::addRule(new QueryDepth($queryDepth));
+        }
 
         $queryComplexity = $this->moduleConfig->getQueryComplexity() ?? $this->queryComplexity;
-        DocumentValidator::addRule(new QueryComplexity($queryComplexity));
+        if ($queryComplexity > 0) {
+            DocumentValidator::addRule(new QueryComplexity($queryComplexity));
+        }
 
         DocumentValidator::addRule(
             new DisableIntrospection((int)$this->introspectionConfig->isIntrospectionDisabled())
