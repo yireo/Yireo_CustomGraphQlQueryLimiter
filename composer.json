@@ -2,7 +2,7 @@
   "name": "yireo/magento2-custom-graph-ql-query-limiter",
   "license": "OSL-3.0",
   "type": "magento2-module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://github.com/yireo/Yireo_CustomGraphQlQueryLimiter",
   "description": "Magento 2 module to sync a GraphQL session with the regular session",
   "keywords": [

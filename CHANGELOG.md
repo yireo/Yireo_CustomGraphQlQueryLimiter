@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6] - 14 August 2025
+### Fixed
+- Switch $source type from string to DocumentNode|string
+
 ## [0.0.5] - 12 August 2025
 ### Fixed
 - Fix implicit nullables for PHP 8.4
