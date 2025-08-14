@@ -1,36 +1,37 @@
 {
-  "name": "yireo/magento2-custom-graph-ql-query-limiter",
-  "license": "OSL-3.0",
-  "type": "magento2-module",
-  "version": "0.0.6",
-  "homepage": "https://github.com/yireo/Yireo_CustomGraphQlQueryLimiter",
-  "description": "Magento 2 module to sync a GraphQL session with the regular session",
-  "keywords": [
-    "composer-installer",
-    "magento"
-  ],
-  "authors": [
-    {
-      "name": "Jisse Reitsma (Yireo)",
-      "email": "jisse@yireo.com"
-    }
-  ],
-  "require": {
-    "magento/framework": "^100.1|^101.0|^102.0|^103.0",
-    "magento/module-checkout": "^100.1",
-    "magento/module-quote": "^100.1|^101.0",
-    "php": "^8.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "*",
-    "yireo/magento2-integration-test-helper": "@dev"
-  },
-  "autoload": {
-    "psr-4": {
-      "Yireo\\CustomGraphQlQueryLimiter\\": ""
+    "name": "yireo/magento2-custom-graph-ql-query-limiter",
+    "license": "OSL-3.0",
+    "type": "magento2-module",
+    "version": "0.0.6",
+    "homepage": "https://github.com/yireo/Yireo_CustomGraphQlQueryLimiter",
+    "description": "Magento 2 module to sync a GraphQL session with the regular session",
+    "keywords": [
+        "composer-installer",
+        "magento"
+    ],
+    "authors": [
+        {
+            "name": "Jisse Reitsma (Yireo)",
+            "email": "jisse@yireo.com"
+        }
+    ],
+    "require": {
+        "magento/framework": "^100.1|^101.0|^102.0|^103.0",
+        "magento/module-backend": "^102.1",
+        "webonyx/graphql-php": "~v15.22.3",
+        "magento/module-quote": "^100.1|^101.0",
+        "php": "^8.0"
     },
-    "files": [
-      "registration.php"
-    ]
-  }
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "yireo/magento2-integration-test-helper": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yireo\\CustomGraphQlQueryLimiter\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
 }
