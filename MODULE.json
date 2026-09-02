@@ -1,0 +1,8 @@
+{
+    "module_name": "Yireo_CustomGraphQlQueryLimiter",
+    "composer_name": "yireo/magento2-custom-graph-ql-query-limiter",
+    "sequence": [
+        "Magento_Backend",
+        "Yireo_IntegrationTestHelper"
+    ]
+}
