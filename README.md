@@ -1,4 +1,12 @@
 # Yireo CustomGraphQlQueryLimiter
+
+<!-- badges.specs.start -->
+![Magento version](https://img.shields.io/badge/Magento-2.4.6%20%7C%202.4.9-orange)
+![PHP version](https://img.shields.io/badge/PHP-8.2%E2%80%938.5-777BB4)
+![License](https://img.shields.io/badge/License-OSL--3.0-blue)
+![Latest Version](https://img.shields.io/packagist/v/yireo/magento2-custom-graph-ql-query-limiter)
+<!-- badges.specs.end -->
+
 Magento 2 module to customize settings for the GraphQL Query Limiter to enhance performance and security of your headless Magento.
 
 ### Installation
@@ -86,3 +94,13 @@ The complexity could be modified as well. Looking at the culprit query above, th
 The Webonyx library also allows you to add a complexity function to a specific field definition. Theoretically, this is something that would need to be customized per query (`categories`, `products`). What makes a specific query less performant and would therefore need to be labeled as *complex*?  
 
 Note that setting an empty value on either query depth or complexity in the database, will make the value to be skipped. At that moment, the original DI configuration is taken into account.
+
+## Current status
+
+<!-- badges.test.start -->
+![Static Tests](https://img.shields.io/github/actions/workflow/status/yireo/Yireo_CustomGraphQlQueryLimiter/static-tests.yml?label=static-tests)
+![Unit Tests](https://img.shields.io/github/actions/workflow/status/yireo/Yireo_CustomGraphQlQueryLimiter/unit-tests.yml?label=unit-tests)
+![Integration Tests](https://img.shields.io/github/actions/workflow/status/yireo/Yireo_CustomGraphQlQueryLimiter/integration-tests.yml?label=integration-tests)
+![Playwright](https://img.shields.io/github/actions/workflow/status/yireo/Yireo_CustomGraphQlQueryLimiter/playwright.yml?label=playwright)
+![DI Compilation](https://img.shields.io/github/actions/workflow/status/yireo/Yireo_CustomGraphQlQueryLimiter/compile.yml?label=compile)
+<!-- badges.test.end -->
