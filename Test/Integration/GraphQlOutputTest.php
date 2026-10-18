@@ -47,6 +47,7 @@ class GraphQlOutputTest extends GraphQlTestCase
     /**
      * @return void
      * @magentoAppArea graphql
+     * @magentoDataFixture Magento/CatalogSearch/_files/full_reindex.php
      * @magentoConfigFixture graphql_query_limiter/settings/query_depth 1000
      * @magentoConfigFixture graphql_query_limiter/settings/query_complexity 100
      */
