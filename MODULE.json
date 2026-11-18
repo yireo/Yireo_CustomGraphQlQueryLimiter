@@ -4,6 +4,7 @@
     "sequence": [
         "Magento_Backend",
         "Magento_Config",
+        "Magento_GraphQl",
         "Yireo_IntegrationTestHelper"
     ],
     "phpcs_severity": "6",
