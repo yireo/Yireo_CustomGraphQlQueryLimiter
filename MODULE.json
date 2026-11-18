@@ -3,6 +3,7 @@
     "composer_name": "yireo/magento2-custom-graph-ql-query-limiter",
     "sequence": [
         "Magento_Backend",
+        "Magento_Config",
         "Yireo_IntegrationTestHelper"
     ],
     "phpcs_severity": "6",
