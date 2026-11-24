@@ -12,11 +12,6 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Magento_Backend::marketing">
-                    <resource id="Magento_Backend::marketing_communications">
-                        <resource id="Yireo_CustomGraphQlQueryLimiter::index" title="Yireo CustomGraphQlQueryLimiter" sortOrder="10" />
-                    </resource>
-                </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">

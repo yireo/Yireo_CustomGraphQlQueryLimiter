@@ -4,7 +4,7 @@
     "type": "magento2-module",
     "version": "0.0.6",
     "homepage": "https://github.com/yireo/Yireo_CustomGraphQlQueryLimiter",
-    "description": "Magento 2 module to sync a GraphQL session with the regular session",
+    "description": "Magento 2 module to configure the GraphQL query depth and complexity limits from the Admin Panel",
     "keywords": [
         "composer-installer",
         "magento"
