@@ -6,34 +6,34 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class Config
 {
-    /**
-     * @var ScopeConfigInterface
-     */
-    private $scopeConfig;
-
-    /**
-     * Config constructor.
-     * @param ScopeConfigInterface $scopeConfig
-     */
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
-        $this->scopeConfig = $scopeConfig;
     }
 
-    /**
-     * @return int
-     */
-    public function getQueryDepth(): int
+    public function getQueryDepth(): ?int
     {
-        return (int) $this->scopeConfig->getValue('graphql_query_limiter/settings/query_depth');
+        return $this->getPositiveInteger('graphql_query_limiter/settings/query_depth');
     }
 
-    /**
-     * @return int
-     */
-    public function getQueryComplexity(): int
+    public function getQueryComplexity(): ?int
     {
-        return (int) $this->scopeConfig->getValue('graphql_query_limiter/settings/query_complexity');
+        return $this->getPositiveInteger('graphql_query_limiter/settings/query_complexity');
+    }
+
+    private function getPositiveInteger(string $path): ?int
+    {
+        $value = $this->scopeConfig->getValue($path);
+        if (is_int($value)) {
+            return $value > 0 ? $value : null;
+        }
+
+        $value = trim((string)$value, " \t\n\r\0\x0B");
+        if (!ctype_digit($value)) {
+            return null;
+        }
+
+        $value = (int)$value;
+        return $value > 0 ? $value : null;
     }
 }
