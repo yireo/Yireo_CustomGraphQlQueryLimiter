@@ -2,6 +2,8 @@
 
 namespace Yireo\CustomGraphQlQueryLimiter\Test\Integration;
 
+use Magento\Framework\App\Config\MutableScopeConfigInterface;
+use Magento\TestFramework\Helper\Bootstrap;
 use Yireo\IntegrationTestHelper\Test\Integration\GraphQlTestCase;
 
 class GraphQlOutputTest extends GraphQlTestCase
@@ -75,5 +77,55 @@ class GraphQlOutputTest extends GraphQlTestCase
         $graphQlQueryFile = file_get_contents(__DIR__ . '/fixtures/deep_query.graphql');
         $queryData = $this->getGraphQlQueryData($graphQlQueryFile);
         $this->assertGraphQlDataHasError('Max query depth should be 3 but got', $queryData);
+    }
+
+    /**
+     * @return void
+     * @magentoAppArea graphql
+     * @magentoConfigFixture graphql_query_limiter/settings/query_depth 0
+     * @magentoConfigFixture graphql_query_limiter/settings/query_complexity 0
+     */
+    public function testIfMagentoDefaultIsUsedWhenQueryDepthIsZero()
+    {
+        $graphQlQueryFile = file_get_contents(__DIR__ . '/fixtures/very_deep_query.graphql');
+        $queryData = $this->getGraphQlQueryData($graphQlQueryFile);
+        $this->assertGraphQlDataHasError('Max query depth should be 20 but got', $queryData);
+    }
+
+    /**
+     * @return void
+     * @magentoAppArea graphql
+     */
+    public function testIfMagentoDefaultIsUsedWhenQueryDepthIsEmpty()
+    {
+        $scopeConfig = Bootstrap::getObjectManager()->get(MutableScopeConfigInterface::class);
+        $paths = ['graphql_query_limiter/settings/query_depth', 'graphql_query_limiter/settings/query_complexity'];
+        $originalValues = [];
+        foreach ($paths as $path) {
+            $originalValues[$path] = $scopeConfig->getValue($path);
+            $scopeConfig->setValue($path, '');
+        }
+
+        try {
+            $graphQlQueryFile = file_get_contents(__DIR__ . '/fixtures/very_deep_query.graphql');
+            $queryData = $this->getGraphQlQueryData($graphQlQueryFile);
+            $this->assertGraphQlDataHasError('Max query depth should be 20 but got', $queryData);
+        } finally {
+            foreach ($originalValues as $path => $originalValue) {
+                $scopeConfig->setValue($path, $originalValue);
+            }
+        }
+    }
+
+    /**
+     * @return void
+     * @magentoAppArea graphql
+     * @magentoConfigFixture graphql_query_limiter/settings/query_depth -1
+     * @magentoConfigFixture graphql_query_limiter/settings/query_complexity -1
+     */
+    public function testIfQueryWorksWhenValuesAreNegative()
+    {
+        $queryData = $this->getGraphQlQueryData('query { __schema { types { kind }} }');
+        $this->assertGraphQlDataHasData('__schema.types', $queryData);
     }
 }

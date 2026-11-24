@@ -2,42 +2,23 @@
 
 namespace Yireo\CustomGraphQlQueryLimiter\Plugin;
 
-use GraphQL\Error\Error;
 use GraphQL\Language\AST\DocumentNode;
-use GraphQL\Validator\DocumentValidator;
-use GraphQL\Validator\Rules\QueryComplexity;
-use GraphQL\Validator\Rules\QueryDepth;
+use Magento\Framework\GraphQl\Exception\ExceptionFormatter;
+use Magento\Framework\GraphQl\Query\QueryComplexityLimiter;
 use Magento\Framework\GraphQl\Query\QueryProcessor;
 use Magento\Framework\GraphQl\Query\Resolver\ContextInterface;
 use Magento\Framework\GraphQl\Schema;
-use Yireo\CustomGraphQlQueryLimiter\Config\Config;
 
 class QueryProcessorPlugin
 {
-    /**
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * QueryComplexityLimiterPlugin constructor.
-     * @param Config $config
-     */
     public function __construct(
-        Config $config
+        private readonly QueryComplexityLimiter $queryComplexityLimiter,
+        private readonly ExceptionFormatter $exceptionFormatter
     ) {
-        $this->config = $config;
     }
 
     /**
-     * @param QueryProcessor $queryProcessor
-     * @param Schema $schema
-     * @param string $source
-     * @param ContextInterface|null $contextValue
-     * @param array|null $variableValues
-     * @param string|null $operationName
-     * @return array
-     * @throws Error
+     * @return null
      */
     public function beforeProcess(
         QueryProcessor $queryProcessor,
@@ -47,9 +28,10 @@ class QueryProcessorPlugin
         ?array $variableValues = null,
         ?string $operationName = null
     ) {
-        DocumentValidator::addRule(new QueryComplexity($this->config->getQueryComplexity()));
-        DocumentValidator::addRule(new QueryDepth($this->config->getQueryDepth()));
+        if ($this->exceptionFormatter->shouldShowDetail()) {
+            $this->queryComplexityLimiter->execute();
+        }
 
-        return [$schema, $source, $contextValue, $variableValues, $operationName];
+        return null;
     }
 }

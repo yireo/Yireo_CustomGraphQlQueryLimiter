@@ -93,7 +93,7 @@ The complexity could be modified as well. Looking at the culprit query above, th
 
 The Webonyx library also allows you to add a complexity function to a specific field definition. Theoretically, this is something that would need to be customized per query (`categories`, `products`). What makes a specific query less performant and would therefore need to be labeled as *complex*?  
 
-Note that setting an empty value on either query depth or complexity in the database, will make the value to be skipped. At that moment, the original DI configuration is taken into account.
+Note that setting an empty value, `0` or an invalid value on either query depth or complexity, will make the value to be skipped. At that moment, the original DI configuration of Magento is taken into account. The limits are never disabled by this module: To allow bigger queries, set a higher number instead.
 
 ## Current status
 

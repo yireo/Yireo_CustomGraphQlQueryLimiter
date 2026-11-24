@@ -4,7 +4,7 @@ namespace Yireo\CustomGraphQlQueryLimiter\Test\Integration;
 
 use Magento\Framework\GraphQl\Query\QueryComplexityLimiter;
 use Magento\Framework\GraphQl\Query\QueryProcessor;
-use Yireo\CustomGraphQlQueryLimiter\GraphQl\Query\CustomQueryComplexityLimiter;
+use Yireo\CustomGraphQlQueryLimiter\Plugin\QueryComplexityLimiterPlugin;
 use Yireo\CustomGraphQlQueryLimiter\Plugin\QueryProcessorPlugin;
 use Yireo\IntegrationTestHelper\Test\Integration\AbstractTestCase;
 
@@ -16,13 +16,17 @@ class ModuleTest extends AbstractTestCase
         $this->assertModuleIsEnabled('Yireo_CustomGraphQlQueryLimiter');
     }
 
-    public function testIfPreferenceWorks()
+    /**
+     * @magentoAppArea graphql
+     */
+    public function testIfPluginsAreRegistered()
     {
-        $this->assertPreferenceOf(CustomQueryComplexityLimiter::class, QueryComplexityLimiter::class);
-    }
+        $this->assertInterceptorPluginIsRegistered(
+            QueryComplexityLimiter::class,
+            QueryComplexityLimiterPlugin::class,
+            'Yireo_CustomGraphQlQueryLimiter_QueryComplexityLimiterPlugin'
+        );
 
-    public function testIfPluginWorks()
-    {
         $this->assertInterceptorPluginIsRegistered(
             QueryProcessor::class,
             QueryProcessorPlugin::class,

@@ -1,0 +1,53 @@
+query {
+    categoryList {
+        children {
+            children {
+                children {
+                    children {
+                        children {
+                            children {
+                                children {
+                                    children {
+                                        children {
+                                            children {
+                                                children {
+                                                    children {
+                                                        children {
+                                                            children {
+                                                                children {
+                                                                    children {
+                                                                        children {
+                                                                            children {
+                                                                                children {
+                                                                                    children {
+                                                                                        children {
+                                                                                            children {
+                                                                                                children {
+                                                                                                    children {
+                                                                                                        uid
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
