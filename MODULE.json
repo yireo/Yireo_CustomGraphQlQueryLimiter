@@ -7,5 +7,41 @@
         "Magento_GraphQl"
     ],
     "phpcs_severity": "6",
-    "phpstan_level": "5"
+    "phpstan_level": "5",
+    "php_versions": [
+        "8.1",
+        "8.2",
+        "8.3"
+    ],
+    "skip_magento_versions": [],
+    "skip_css_utils": false,
+    "modules": [
+        "Magento_Authorization",
+        "Magento_Backend",
+        "Magento_Config",
+        "Magento_Csp",
+        "Magento_Directory",
+        "Magento_Eav",
+        "Magento_GraphQl",
+        "Magento_Store",
+        "Magento_Theme"
+    ],
+    "components": [],
+    "config": [
+        {
+            "path": "graphql_query_limiter/settings/query_depth",
+            "label": "Settings > Query Depth",
+            "description": ""
+        },
+        {
+            "path": "graphql_query_limiter/settings/query_complexity",
+            "label": "Settings > Query Complexity",
+            "description": ""
+        }
+    ],
+    "tests": {
+        "unit": 8,
+        "integration": 10,
+        "functional": 0
+    }
 }
